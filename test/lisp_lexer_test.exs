@@ -20,7 +20,15 @@ defmodule LispLexerTest do
   end
 
   test "operators" do
+    assert {:ok, plus, _} = :lisp_lexer.string('+')
+    assert {:ok, minus, _} = :lisp_lexer.string('-')
+    assert {:ok, times, _} = :lisp_lexer.string('*')
+    assert {:ok, divide, _} = :lisp_lexer.string('/')
 
+    assert plus == [ {:"", 1} ]
+    assert minus == [ {:"-", 1} ]
+    assert times == [ {:"*", 1} ]
+    assert divide == [ {:"/", 1} ]
   end
 
 end
