@@ -10,12 +10,15 @@ Rules.
 {ATOM}        : {token, {atom, TokenLine, to_atom(TokenChars)}}.
 \(            : {token, {'(',  TokenLine}}.
 \)            : {token, {')',  TokenLine}}.
+\[            : {token, {'[',  TokenLine}}.
+\]            : {token, {']',  TokenLine}}.
 
 % OPERATORS
 \+            : {token, {'+',  TokenLine}}.
 \-            : {token, {'-',  TokenLine}}.
 \*            : {token, {'*',  TokenLine}}.
 \/            : {token, {'/',  TokenLine}}.
+
 {WHITESPACE}+ : skip_token.
 
 Erlang code.

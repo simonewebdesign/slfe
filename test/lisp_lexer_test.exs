@@ -31,4 +31,25 @@ defmodule LispLexerTest do
     assert divide == [ {:"/", 1} ]
   end
 
+  test "lists" do
+    {:ok, tokens, _} = :lisp_lexer.string('[1 2 3]')
+    assert tokens == [ {:"[", 1},
+                       {:int, 1, 1},
+                       {:int, 1, 2},
+                       {:int, 1, 3},
+                       {:"]", 1}
+                     ]
+
+    {:ok, tokens, _} = :lisp_lexer.string('(:reverse [1 2 3])')
+    assert tokens == [ {:"(", 1},
+                       {:atom, 1, :reverse},
+                       {:"[", 1},
+                       {:int, 1, 1},
+                       {:int, 1, 2},
+                       {:int, 1, 3},
+                       {:"]", 1},
+                       {:")", 1}
+                     ]
+  end
+
 end
