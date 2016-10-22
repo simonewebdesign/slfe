@@ -1,12 +1,12 @@
 Nonterminals list elems elem.
-Terminals '[' ']' ',' int atom.
+Terminals '(' ')' int atom.
 Rootsymbol list.
 
-list -> '[' ']'       : [].
-list -> '[' elems ']' : '$2'.
+list -> '(' ')'       : [].
+list -> '(' elems ')' : '$2'.
 
 elems -> elem           : ['$1'].
-elems -> elem ',' elems : ['$1'|'$3'].
+elems -> elem elems     : ['$1'|'$2'].
 
 elem -> int  : extract_token('$1').
 elem -> atom : extract_token('$1').
