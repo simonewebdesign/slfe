@@ -25,7 +25,7 @@ defmodule LispLexerTest do
     assert {:ok, times, _} = :lisp_lexer.string('*')
     assert {:ok, divide, _} = :lisp_lexer.string('/')
 
-    assert plus == [ {:"", 1} ]
+    assert plus == [ {:"+", 1} ]
     assert minus == [ {:"-", 1} ]
     assert times == [ {:"*", 1} ]
     assert divide == [ {:"/", 1} ]
