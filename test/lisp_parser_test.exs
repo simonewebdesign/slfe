@@ -16,6 +16,6 @@ defmodule LispParserTest do
   end
 
   test "function with list as argument" do
-    # assert LispParser.parse("(:reverse [1, 2, 3])") == [:reverse, 1, 2]
+    assert LispParser.parse("(:reverse [1 2 3])") == [:reverse, {[1, 2, 3]}]
   end
 end
