@@ -19,6 +19,12 @@ Rules.
 \*            : {token, {'*',  TokenLine}}.
 \/            : {token, {'/',  TokenLine}}.
 
+% BOOLEAN
+if            : {token, {'if', TokenLine}}.
+true          : {token, {'true', TokenLine}}.
+false         : {token, {'false', TokenLine}}.
+
+
 {WHITESPACE}+ : skip_token.
 
 Erlang code.

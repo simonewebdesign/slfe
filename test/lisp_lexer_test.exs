@@ -52,4 +52,20 @@ defmodule LispLexerTest do
                      ]
   end
 
+  test "boolean" do
+    {:ok, tokens, _} = :lisp_lexer.string('(if true (+ 1 2) (:nope))')
+    assert tokens == [ {:"(", 1},
+                       {:if, 1},
+                       {true, 1},
+                         {:"(", 1},
+                         {:+, 1},
+                         {:int, 1, 1},
+                         {:int, 1, 2},
+                         {:")", 1},
+                         {:"(", 1},
+                         {:atom, 1, :nope},
+                         {:")", 1},
+                       {:")", 1}
+                     ]
+  end
 end
