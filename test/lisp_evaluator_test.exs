@@ -3,16 +3,16 @@ defmodule LispEvaluatorTest do
   doctest LispEvaluator
 
   test "can evaluate expressions" do
-      assert 3 == LispEvaluator.evaluate("(+ 1 2)")
+    assert 3 == LispEvaluator.evaluate("(+ 1 2)")
   end
 
   test "can evaluate nested expressions" do
-      assert 2 == LispEvaluator.evaluate("(+ 1 (- 3 2))")
-      assert 9 == LispEvaluator.evaluate("(* (/ 9 3) (* 1 3))")
+    assert 2 == LispEvaluator.evaluate("(+ 1 (- 3 2))")
+    assert 9 == LispEvaluator.evaluate("(* (/ 9 3) (* 1 3))")
   end
 
   test "can evaluate values" do
-      assert 42 == LispEvaluator.evaluate("(42)")
+    assert 42 == LispEvaluator.evaluate("(42)")
   end
 
   test "can evaluate nested values" do
@@ -23,6 +23,6 @@ defmodule LispEvaluatorTest do
   end
 
   test "no code returns false" do
-      assert false == LispEvaluator.evaluate("")
+    assert false == LispEvaluator.evaluate("")
   end
 end
