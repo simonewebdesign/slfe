@@ -32,17 +32,23 @@ You can do so by running `mix test` from the command line.
 
 ## FAQ
 
-### Should I use this?
+<details>
+  <summary>Should I use this?</summary>
 
 Probably not. This is actually just an experiment, so I wouldn't recommend people using it to build actual programs. But feel free to use it anyway if you want.
+</details>
 
-### Why Erlang/Elixir?
+<details>
+  <summary>Why Erlang/Elixir?</summary>
 
 [`leex`](http://erlang.org/doc/man/leex.html) and [`yecc`](http://erlang.org/doc/man/yecc.html) are the powerful Erlang alternatives to [`lex`](http://en.wikipedia.org/wiki/Lex_(software)) and [`yacc`](https://en.wikipedia.org/wiki/Yacc). I like Erlang, and Elixir is pretty rad too. So why not.
+</details>
 
-### Is SLFE a Turing-complete language?
+<details>
+  <summary>Is SLFE a Turing-complete language?</summary>
 
 Yeah, I guess.
+</details>
 
 ---
 
