@@ -30,4 +30,8 @@ defmodule LispEvaluatorTest do
     assert true == LispEvaluator.evaluate("(true)")
     assert false ==  LispEvaluator.evaluate("(false)")
   end
+
+  test "if expressions" do
+    assert 3 == LispEvaluator.evaluate("(if true (+ 1 2) (:nope))")
+  end
 end
