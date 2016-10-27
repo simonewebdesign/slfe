@@ -1,5 +1,5 @@
 Nonterminals list elems elem.
-Terminals '(' ')' '[' ']' '+' '-' '*' '/' int atom.
+Terminals '(' ')' '[' ']' '+' '-' '*' '/' 'if' 'true' 'false' int atom.
 Rootsymbol list.
 
 list -> '(' ')'       : [].
@@ -18,6 +18,10 @@ elem -> '+'  : '+'.
 elem -> '-'  : '-'.
 elem -> '*'  : '*'.
 elem -> '/'  : '/'.
+
+elem -> 'if' : 'if'.
+elem -> 'true' : true.
+elem -> 'false' : false.
 
 elem -> list : '$1'.
 

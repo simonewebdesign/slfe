@@ -15,6 +15,10 @@ defmodule LispParserTest do
     assert LispParser.parse("(+ 1 (* (- 4 1) 3))") == [:+, 1, [:*, [:-, 4, 1], 3]]
   end
 
+  test "if expression" do
+    assert LispParser.parse("(if true (+ 1 2) (:nope))") == [:if, true, [:+, 1, 2], [:nope]]
+  end
+
   test "function with list as argument" do
     assert LispParser.parse("(:reverse [1 2 3])") == [:reverse, {[1, 2, 3]}]
   end
