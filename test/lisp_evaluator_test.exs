@@ -25,4 +25,9 @@ defmodule LispEvaluatorTest do
   test "no code returns false" do
     assert false == LispEvaluator.evaluate("")
   end
+
+  test "the truth" do
+    assert true == LispEvaluator.evaluate("(true)")
+    assert false ==  LispEvaluator.evaluate("(false)")
+  end
 end

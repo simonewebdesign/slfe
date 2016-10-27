@@ -10,6 +10,8 @@ defmodule LispEvaluator do
 
   def do_evaluate([]), do: false
 
+  def do_evaluate([elem]) when is_boolean(elem), do: elem
+
   def do_evaluate([head|tail]) when is_atom(head) do
     apply(Kernel, head, Enum.map(tail, &do_evaluate(&1)))
   end
