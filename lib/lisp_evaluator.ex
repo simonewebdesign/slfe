@@ -16,6 +16,10 @@ defmodule LispEvaluator do
     if condition, do: do_evaluate(do_clause), else: do_evaluate(else_clause)
   end
 
+  def do_evaluate([:"/=", left, right]) do
+    apply(Kernel, :!=, [left, right])
+  end
+
   def do_evaluate([head|tail]) when is_atom(head) do
     apply(Kernel, head, Enum.map(tail, &do_evaluate(&1)))
   end

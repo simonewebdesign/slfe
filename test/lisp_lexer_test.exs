@@ -68,4 +68,27 @@ defmodule LispLexerTest do
                        {:")", 1}
                      ]
   end
+
+
+  test "equality" do
+    {:ok, tokens, _} = :lisp_lexer.string('(== (- 4 1) 3)')
+    assert tokens == [ {:"(", 1},
+                       {:==, 1},
+                         {:"(", 1},
+                         {:-, 1},
+                         {:int, 1, 4},
+                         {:int, 1, 1},
+                         {:")", 1},
+                        {:int, 1, 3},
+                       {:")", 1}
+                     ]
+
+    {:ok, tokens, _} = :lisp_lexer.string('(/= true false)')
+    assert tokens == [ {:"(", 1},
+                       {:"/=", 1},
+                       {true, 1},
+                       {false, 1},
+                       {:")", 1}
+                     ]
+  end
 end

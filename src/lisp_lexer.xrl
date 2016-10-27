@@ -24,6 +24,10 @@ if            : {token, {'if', TokenLine}}.
 true          : {token, {'true', TokenLine}}.
 false         : {token, {'false', TokenLine}}.
 
+% EQUALITY
+==            : {token, {'==', TokenLine}}.
+/=            : {token, {'/=', TokenLine}}.
+
 
 {WHITESPACE}+ : skip_token.
 
