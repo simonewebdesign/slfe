@@ -1,6 +1,6 @@
 defmodule LispEvaluatorTest do
   use ExUnit.Case
-  doctest LispEvaluator
+  import ExUnit.CaptureIO
 
   test "can evaluate expressions" do
     assert 3 == LispEvaluator.evaluate("(+ 1 2)")
@@ -39,4 +39,17 @@ defmodule LispEvaluatorTest do
     assert LispEvaluator.evaluate("(== (- 4 1) 3)")
     assert LispEvaluator.evaluate("(/= true false)")
   end
+
+  test "string concatenation" do
+    assert "foobar" == LispEvaluator.evaluate("(:concat \"foo\" \"bar\")")
+  end
+
+  # test "can print to stdout" do
+  #   fun = fn ->
+  #     assert :ok == LispEvaluator.evaluate("(:puts \"Hello, World!\"")
+  #   end
+
+  #   stdout = capture_io(fun)
+  #   assert stdout == "Hello, World!"
+  # end
 end

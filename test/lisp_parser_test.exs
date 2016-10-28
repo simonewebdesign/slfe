@@ -27,4 +27,8 @@ defmodule LispParserTest do
   test "function with list as argument" do
     assert LispParser.parse("(:reverse [1 2 3])") == [:reverse, {[1, 2, 3]}]
   end
+
+  test "string" do
+    assert [:concat, 'foo', 'bar'] == LispParser.parse("(:concat \"foo\" \"bar\")")
+  end
 end

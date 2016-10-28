@@ -1,6 +1,5 @@
 defmodule LispLexerTest do
   use ExUnit.Case
-  # doctest LispLexer
 
   test "empty expression" do
     {:ok, tokens, _} = :lisp_lexer.string('()')
@@ -91,4 +90,21 @@ defmodule LispLexerTest do
                        {:")", 1}
                      ]
   end
+
+  test "strings" do
+    {:ok, tokens, _} = :lisp_lexer.string('("foo")')
+    assert tokens == [ {:"(", 1},
+                       {:string, 1, 'foo'},
+                       {:")", 1}
+                     ]
+
+    {:ok, tokens, _} = :lisp_lexer.string('(:concat \"foo\" \"bar\")')
+    assert tokens == [ {:"(", 1},
+                       {:atom, 1, :concat},
+                       {:string, 1, 'foo'},
+                       {:string, 1, 'bar'},
+                       {:")", 1}
+                     ]
+  end
+
 end

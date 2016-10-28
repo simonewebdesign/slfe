@@ -1,5 +1,5 @@
 Nonterminals list elems elem.
-Terminals '(' ')' '[' ']' '+' '-' '*' '/' 'if' 'true' 'false' '==' '/=' int atom.
+Terminals '(' ')' '[' ']' '+' '-' '*' '/' 'if' 'true' 'false' '==' '/=' int atom string.
 Rootsymbol list.
 
 list -> '(' ')'       : [].
@@ -13,6 +13,7 @@ elems -> elem elems     : ['$1'|'$2'].
 
 elem -> int  : extract_token('$1').
 elem -> atom : extract_token('$1').
+elem -> string : extract_token('$1').
 
 elem -> '+'  : '+'.
 elem -> '-'  : '-'.

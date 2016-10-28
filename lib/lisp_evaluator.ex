@@ -20,6 +20,15 @@ defmodule LispEvaluator do
     apply(Kernel, :!=, [left, right])
   end
 
+  def do_evaluate([:puts, item]) do
+    IO.puts item
+  end
+
+  def do_evaluate([:concat, left, right]) do
+    # left and right are char lists so we need to convert them to strings
+    to_string(left) <> to_string(right)
+  end
+
   def do_evaluate([head|tail]) when is_atom(head) do
     apply(Kernel, head, Enum.map(tail, &do_evaluate(&1)))
   end
