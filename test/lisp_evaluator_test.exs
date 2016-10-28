@@ -44,12 +44,12 @@ defmodule LispEvaluatorTest do
     assert "foobar" == LispEvaluator.evaluate("(:concat \"foo\" \"bar\")")
   end
 
-  # test "can print to stdout" do
-  #   fun = fn ->
-  #     assert :ok == LispEvaluator.evaluate("(:puts \"Hello, World!\"")
-  #   end
+  test "can print to stdout" do
+    fun = fn ->
+      assert :ok == LispEvaluator.evaluate("(:puts \"Hello, World!\")")
+    end
 
-  #   stdout = capture_io(fun)
-  #   assert stdout == "Hello, World!"
-  # end
+    stdout = capture_io(fun)
+    assert stdout == "Hello, World!\n"
+  end
 end
