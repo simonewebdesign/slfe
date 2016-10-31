@@ -48,8 +48,27 @@ defmodule LispEvaluatorTest do
     fun = fn ->
       assert :ok == LispEvaluator.evaluate("(:puts \"Hello, World!\")")
     end
-
     stdout = capture_io(fun)
     assert stdout == "Hello, World!\n"
+  end
+
+  test "a program with two statements" do
+    fun = fn ->
+      assert [:ok | :ok] == LispEvaluator.evaluate("((:puts \"hello\") (:puts \"there\"))")
+    end
+    stdout = capture_io(fun)
+    assert stdout == "hello\nthere\n"
+  end
+
+  test "can evaluate a simple program" do
+    program = """
+    ((:puts "Hello!")
+     (:puts (:concat "1 + 1 = " (:to_string (+ 1 1)))))
+    """
+    fun = fn ->
+      assert [:ok | :ok] == LispEvaluator.evaluate(program)
+    end
+    stdout = capture_io(fun)
+    assert stdout == "Hello!\n1 + 1 = 2\n"
   end
 end

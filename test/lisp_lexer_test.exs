@@ -107,4 +107,27 @@ defmodule LispLexerTest do
                      ]
   end
 
+  test "a simple program" do
+    {:ok, tokens, _} = :lisp_lexer.string('((:puts \"Hello!\")\n (:puts (:concat \"1 + 1 = \" (+ 1 1))))\n')
+    assert tokens == [ {:"(", 1},
+                         {:"(", 1},
+                           {:atom, 1, :puts},
+                           {:string, 1, 'Hello!'},
+                         {:")", 1},
+                         {:"(", 2},
+                           {:atom, 2, :puts},
+                           {:"(", 2},
+                             {:atom, 2, :concat},
+                             {:string, 2, '1 + 1 = '},
+                             {:"(", 2},
+                               {:+, 2},
+                               {:int, 2, 1},
+                               {:int, 2, 1},
+                             {:")", 2},
+                           {:")", 2},
+                         {:")", 2},
+                       {:")", 2}
+                     ]    
+  end
+
 end

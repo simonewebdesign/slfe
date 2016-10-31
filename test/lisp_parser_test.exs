@@ -31,4 +31,16 @@ defmodule LispParserTest do
   test "string" do
     assert [:concat, "foo", "bar"] == LispParser.parse("(:concat \"foo\" \"bar\")")
   end
+
+  test "a simple program" do
+    program = """
+    ((:puts "Hello!")
+     (:puts (:concat "1 + 1 = " (+ 1 1))))
+    """
+    expected =
+      [ [:puts, "Hello!"],
+        [:puts, [:concat, "1 + 1 = ", [:+, 1, 1]]]]
+
+    assert expected == LispParser.parse(program)
+  end
 end

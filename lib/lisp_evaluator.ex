@@ -8,7 +8,9 @@ defmodule LispEvaluator do
   end
 
 
-  defp do_evaluate([]), do: false
+  defp do_evaluate([h, t]) when is_list(h) and is_list(t) do
+    [do_evaluate(h)] ++ do_evaluate(t)
+  end
 
   defp do_evaluate([elem]) when is_boolean(elem), do: elem
 
@@ -20,13 +22,28 @@ defmodule LispEvaluator do
     apply(Kernel, :!=, [left, right])
   end
 
-  defp do_evaluate([:puts, item]) do
+  defp do_evaluate([:concat, left, right]) when is_binary(left) and is_binary(right) do
+    left <> right
+  end
+
+  defp do_evaluate([:concat, left, right]) when is_binary(left) do
+    left <> do_evaluate(right)
+  end
+
+  defp do_evaluate([:concat, left, right]) when is_binary(right) do
+    left <> do_evaluate(right)
+  end
+
+  defp do_evaluate([:to_string, arg]) do
+    to_string(do_evaluate(arg))
+  end
+
+  defp do_evaluate([:puts, item]) when is_binary(item) do
     IO.puts item
   end
 
-  defp do_evaluate([:concat, left, right]) do
-    # left and right are char lists so we need to convert them to strings
-    to_string(left) <> to_string(right)
+  defp do_evaluate([:puts, item]) do
+    IO.puts do_evaluate(item)
   end
 
   defp do_evaluate([head|tail]) when is_atom(head) do
