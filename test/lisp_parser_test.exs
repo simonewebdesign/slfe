@@ -29,6 +29,6 @@ defmodule LispParserTest do
   end
 
   test "string" do
-    assert [:concat, 'foo', 'bar'] == LispParser.parse("(:concat \"foo\" \"bar\")")
+    assert [:concat, "foo", "bar"] == LispParser.parse("(:concat \"foo\" \"bar\")")
   end
 end

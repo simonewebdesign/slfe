@@ -3,6 +3,7 @@
 -file("src/lisp_parser.yrl", 32).
 
 extract_token({_Token, _Line, Value}) -> Value.
+get_string({_Token, _Line, Value}) -> 'Elixir.List':to_string(Value).
 
 -file("/usr/local/Cellar/erlang/18.3/lib/erlang/lib/parsetools-2.1.1/include/yeccpre.hrl", 0).
 %%
@@ -178,7 +179,7 @@ yecctoken2string(Other) ->
 
 
 
--file("src/lisp_parser.erl", 181).
+-file("src/lisp_parser.erl", 182).
 
 -dialyzer({nowarn_function, yeccpars2/7}).
 yeccpars2(0=S, Cat, Ss, Stack, T, Ts, Tzr) ->
@@ -538,7 +539,7 @@ yeccpars2_17_(__Stack0) ->
 yeccpars2_18_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
-   extract_token ( __1 )
+   get_string ( __1 )
   end | __Stack].
 
 -compile({inline,yeccpars2_19_/1}).
@@ -582,4 +583,4 @@ yeccpars2_24_(__Stack0) ->
   end | __Stack].
 
 
--file("src/lisp_parser.yrl", 35).
+-file("src/lisp_parser.yrl", 36).
