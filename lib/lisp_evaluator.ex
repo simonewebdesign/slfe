@@ -1,56 +1,51 @@
 defmodule LispEvaluator do
 
-  def evaluate(""), do: false
+  def evaluate(""),   do: false
+  def evaluate(code), do: eval(LispParser.parse(code))
 
-  def evaluate(code) do
-    LispParser.parse(code)
-    |> do_evaluate
+  defp eval([h, t]) when is_list(h) and is_list(t) do
+    [eval(h)] ++ eval(t)
   end
 
+  defp eval([elem]) when is_boolean(elem), do: elem
 
-  defp do_evaluate([h, t]) when is_list(h) and is_list(t) do
-    [do_evaluate(h)] ++ do_evaluate(t)
+  defp eval([:if, condition, do_clause, else_clause]) do
+    if condition, do: eval(do_clause), else: eval(else_clause)
   end
 
-  defp do_evaluate([elem]) when is_boolean(elem), do: elem
-
-  defp do_evaluate([:if, condition, do_clause, else_clause]) do
-    if condition, do: do_evaluate(do_clause), else: do_evaluate(else_clause)
-  end
-
-  defp do_evaluate([:"/=", left, right]) do
+  defp eval([:"/=", left, right]) do
     apply(Kernel, :!=, [left, right])
   end
 
-  defp do_evaluate([:concat, left, right]) when is_binary(left) and is_binary(right) do
+  defp eval([:concat, left, right]) when is_binary(left) and is_binary(right) do
     left <> right
   end
 
-  defp do_evaluate([:concat, left, right]) when is_binary(left) do
-    left <> do_evaluate(right)
+  defp eval([:concat, left, right]) when is_binary(left) do
+    left <> eval(right)
   end
 
-  defp do_evaluate([:concat, left, right]) when is_binary(right) do
-    left <> do_evaluate(right)
+  defp eval([:concat, left, right]) when is_binary(right) do
+    left <> eval(right)
   end
 
-  defp do_evaluate([:to_string, arg]) do
-    to_string(do_evaluate(arg))
+  defp eval([:to_string, arg]) do
+    to_string(eval(arg))
   end
 
-  defp do_evaluate([:puts, item]) when is_binary(item) do
+  defp eval([:puts, item]) when is_binary(item) do
     IO.puts item
   end
 
-  defp do_evaluate([:puts, item]) do
-    IO.puts do_evaluate(item)
+  defp eval([:puts, item]) do
+    IO.puts eval(item)
   end
 
-  defp do_evaluate([head|tail]) when is_atom(head) do
-    apply(Kernel, head, Enum.map(tail, &do_evaluate(&1)))
+  defp eval([head|tail]) when is_atom(head) do
+    apply(Kernel, head, Enum.map(tail, &eval(&1)))
   end
 
-  defp do_evaluate([head|_]) do
+  defp eval([head|_]) do
     case head do
       [[[value]]] -> value
       [[value]] -> value
@@ -59,5 +54,5 @@ defmodule LispEvaluator do
     end
   end
 
-  defp do_evaluate(elem), do: elem
+  defp eval(elem), do: elem
 end
