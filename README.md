@@ -1,4 +1,4 @@
-# SLFE
+# SLFE [![Build Status](https://travis-ci.org/simonewebdesign/slfe.svg?branch=master)](https://travis-ci.org/simonewebdesign/slfe) [![Coverage Status](https://coveralls.io/repos/github/simonewebdesign/slfe/badge.svg?branch=master)](https://coveralls.io/github/simonewebdesign/slfe?branch=master)
 
 **SLFE** stands for **S**hitty [**LFE**](http://lfe.io/) ([LISP](https://www.common-lisp.net/)-flavoured [Erlang](http://www.erlang.org/)).
 
