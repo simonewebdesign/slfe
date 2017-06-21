@@ -7,7 +7,9 @@ defmodule LispParser.Mixfile do
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps()]
+     deps: deps(),
+     test_coverage: [tool: ExCoveralls],
+    ]
   end
 
   # Configuration for the OTP application
@@ -27,6 +29,8 @@ defmodule LispParser.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:mix_test_watch, "~> 0.2", only: :dev}]
+    [{:mix_test_watch, "~> 0.4", only: :dev},
+     {:excoveralls, "~> 0.7", only: :test},
+    ]
   end
 end
